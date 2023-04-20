@@ -1,5 +1,5 @@
 <?php
-    //https://technorizen.com/_angotech_homol1/wp-webservices/login.php?username=admin&password=placeapart-2020
+    ///wp-webservices/login.php?username=admin&password=
     require ('../wp-config.php');
     $username = sanitize_text_field($_REQUEST['username']);
     $password = sanitize_text_field($_REQUEST['password']);
