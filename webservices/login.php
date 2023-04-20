@@ -1,5 +1,5 @@
 <?php
-    ///wp-webservices/login.php?username=admin&password=
+    //wp-webservices/login.php?username=admin&password=placeapart-2020
     require ('../wp-config.php');
     $username = sanitize_text_field($_REQUEST['username']);
     $password = sanitize_text_field($_REQUEST['password']);
