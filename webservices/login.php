@@ -1,5 +1,5 @@
 <?php
-    //wp-webservices/login.php?username=admin&password=placeapart-2020
+    //https://technorizen.com/_angotech_homol1/wp-webservices/login.php?username=admin&password=placeapart-2020&android_device_id=android_device_id&ios_device_id=ios_device_id
     require ('../wp-config.php');
     $username = sanitize_text_field($_REQUEST['username']);
     $password = sanitize_text_field($_REQUEST['password']);
@@ -38,10 +38,34 @@
     http_response_code(200);
     header('Content-Type: application/json');
     $token = wp_generate_auth_cookie($user->ID, 1209600); // 2 weeks
-    $data = array("ID" => $user->data->ID, "user_login" => $user->data->user_login, "user_email" => $user->data->user_email, "user_registered" => $user->data->user_registered);
+    
+    
+    // update user meta for android_device_id and ios_device_id if not empty
+    if (!empty($_REQUEST['android_device_id'])) {
+        update_user_meta($user->data->ID, 'android_device_id', sanitize_text_field($_REQUEST['android_device_id']));
+    }
+    
+    if (!empty($_REQUEST['ios_device_id'])) {
+        update_user_meta($user->data->ID, 'ios_device_id', sanitize_text_field($_REQUEST['ios_device_id']));
+    }
+    
+    $user_meta = get_user_meta($user->data->ID);
+
+    
+    $data = array("ID" => $user->data->ID, "user_login" => $user->data->user_login, "user_email" => $user->data->user_email, 
+    "user_registered" => $user->data->user_registered,
+    
+    "country_code" =>  ($user_meta['country_code'][0] == NULL)?"":$user_meta['country_code'][0],
+    "mobile" => ($user_meta['mobile'][0] == NULL)?"":$user_meta['mobile'][0],
+    "android_device_id" => ($user_meta['android_device_id'][0] == NULL)?"":$user_meta['android_device_id'][0],
+    "ios_device_id" => ($user_meta['ios_device_id'][0] == NULL)?"":$user_meta['ios_device_id'][0],
+
+    
+    );
+    
     $output["result"] = $data;
     $output["status"] = 1;
     $output["message"] = "Login Successful.";
     $output["token"] = $token;
     echo json_encode($output);
-    ?>
+?>
