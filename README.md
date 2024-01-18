@@ -1,2 +1,4 @@
 https://vegibit.com/wordpress-theme-development-tutorial-step-by-step/
-https://www.wpbeginner.com/wp-tutorials/how-to-create-a-wordpress-plugin/
+
+
+https://mehdinazari.com/how-to-create-hello-world-plugin-for-wordpress/
