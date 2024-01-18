@@ -1,2 +1,1 @@
-# wordpress-chat
-wordpress-chat
+https://vegibit.com/wordpress-theme-development-tutorial-step-by-step/
